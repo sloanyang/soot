@@ -21,7 +21,6 @@ SOOT_CMD="soot.tools.AndroidInstrument \
  -allow-phantom-refs \
  -src-prec apk \
  -ire \
- -f J \
  $PROCESS_THIS
 "
 
