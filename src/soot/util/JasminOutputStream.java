@@ -19,6 +19,7 @@
 
 package soot.util;
 import java.io.*;
+import jasmin.*;
 
 /**
  * An output stream that wraps an existing output stream, and converts Jasmin

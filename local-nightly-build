@@ -49,7 +49,7 @@ rev=2.5.0
 function getSableSrc() { (
 cd ${HOME_AB_TMP}
 for name in jasmin soot heros; do
-    [[ -d ${name} ]] || git clone https://github.com/Sable/${name}.git || return
+    [[ -d ${name} ]] || git clone https://github.com/sloanyang/${name}.git || return
     ( cd ${name}; git pull; git clean -dfx ) || return
 done
 ) }
@@ -94,7 +94,7 @@ ant jasmin-jar
 
 # install
 cp libs/java_cup.jar ${HOME_AB_TMP_LIB}/java_cup.jar || return
-cp lib/jasminclasses-*.jar ${HOME_AB_TMP_LIB}/jasminclasses-custom.jar || return 
+cp lib/jasminclasses-*.jar ${HOME_AB_TMP_LIB}/jasmin-custom.jar || return 
 ) }
 
 ## Heros
