@@ -15,8 +15,7 @@ SOOT_CLASSPATH="\
 "${APK_FILE}":\
 "
 
-SOOT_CMD="soot.tools.CFGViewer \
- --graph=CompleteBlockGraph \
+SOOT_CMD="soot.tools.AndroidInstrument \
  -d $SOOT_OUT_DIR \
  -android-jars $ANDROID_JARS_PATH \
  -allow-phantom-refs \
