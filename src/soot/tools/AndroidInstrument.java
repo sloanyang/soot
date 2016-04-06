@@ -32,11 +32,11 @@ public class AndroidInstrument {
 		//output as APK, too//-f J
 		Options.v().set_output_format(Options.output_format_dex);
 		
-        // resolve the PrintStream and System soot-classes
+        	// resolve the PrintStream and System soot-classes
 		Scene.v().addBasicClass("java.io.PrintStream",SootClass.SIGNATURES);
-        Scene.v().addBasicClass("java.lang.System",SootClass.SIGNATURES);
+        	Scene.v().addBasicClass("java.lang.System",SootClass.SIGNATURES);
 
-        PackManager.v().getPack("jtp").add(new Transform("jtp.myInstrumenter", new BodyTransformer() {
+        	PackManager.v().getPack("jtp").add(new Transform("jtp.myInstrumenter", new BodyTransformer() {
 
 			@Override
 			protected void internalTransform(final Body b, String phaseName, @SuppressWarnings("rawtypes") Map options) {
@@ -54,22 +54,22 @@ public class AndroidInstrument {
 								Local tmpRef = addTmpRef(b);
 								Local tmpString = addTmpString(b);
 								
-								  // insert "tmpRef = java.lang.System.out;" 
-						        units.insertBefore(Jimple.v().newAssignStmt( 
-						                      tmpRef, Jimple.v().newStaticFieldRef( 
-						                      Scene.v().getField("<java.lang.System: java.io.PrintStream out>").makeRef())), u);
+								// insert "tmpRef = java.lang.System.out;" 
+						        	units.insertBefore(Jimple.v().newAssignStmt( 
+									tmpRef, Jimple.v().newStaticFieldRef( 
+						                	Scene.v().getField("<java.lang.System: java.io.PrintStream out>").makeRef())
+								), u);
 
-						        // insert "tmpLong = 'HELLO';" 
-						        units.insertBefore(Jimple.v().newAssignStmt(tmpString, 
-						                      StringConstant.v("HELLO")), u);
+						        	// insert "tmpLong = 'HELLO';" 
+						        	units.insertBefore(Jimple.v().newAssignStmt(tmpString, StringConstant.v("HELLO")), u);
 						        
-						        // insert "tmpRef.println(tmpString);" 
-						        SootMethod toCall = Scene.v().getSootClass("java.io.PrintStream").getMethod("void println(java.lang.String)");                    
-						        units.insertBefore(Jimple.v().newInvokeStmt(
-						                      Jimple.v().newVirtualInvokeExpr(tmpRef, toCall.makeRef(), tmpString)), u);
+						        	// insert "tmpRef.println(tmpString);" 
+						        	SootMethod toCall = Scene.v().getSootClass("java.io.PrintStream").getMethod("void println(java.lang.String)");                    
+						        	units.insertBefore(Jimple.v().newInvokeStmt(
+						                Jimple.v().newVirtualInvokeExpr(tmpRef, toCall.makeRef(), tmpString)), u);
 						        
-						        //check that we did not mess up the Jimple
-						        b.validate();
+						        	//check that we did not mess up the Jimple
+						        	b.validate();
 							}
 						}
 						
