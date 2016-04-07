@@ -49,7 +49,7 @@ public class AndroidInstrument {
 						
 						public void caseInvokeStmt(InvokeStmt stmt) {
 							InvokeExpr invokeExpr = stmt.getInvokeExpr();
-							if(invokeExpr.getMethod().getName().equals("onDraw")) {
+							if(invokeExpr.getMethod().getName().equals("onCreate")) {
 
 								Local tmpRef = addTmpRef(b);
 								Local tmpString = addTmpString(b);
